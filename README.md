@@ -1,0 +1,2 @@
+# rotator
+Game for test
