@@ -11,7 +11,7 @@ public class PlayerStateMachine : MonoBehaviour
     private RotatorState _rotator;
     private HealthContainer _healthContainer;
     private DiedState _diedState;
-
+    
     public PlayerState State { get; private set; } = PlayerState.Idle;
 
     private void Awake()
@@ -22,7 +22,6 @@ public class PlayerStateMachine : MonoBehaviour
         _rotator = GetComponent<RotatorState>();
         _healthContainer = GetComponent<HealthContainer>();
         _diedState = GetComponent<DiedState>();
-
         _playerStateMachine.Fire(PlayerTrigger.StopRotate);
     }
 
@@ -62,7 +61,6 @@ public class PlayerStateMachine : MonoBehaviour
             .OnEntry(() =>
             {
                 State = PlayerState.Died;
-                _diedState.enabled = true;
                 enabled = false;
             }).Ignore(PlayerTrigger.LostHealthPoint);
     }

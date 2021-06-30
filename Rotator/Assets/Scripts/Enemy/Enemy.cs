@@ -8,6 +8,10 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private int _healthPoint;
     [SerializeField] private int _damage;
 
+    private EnemyMover _mover;
+
+    private void Awake() => _mover = GetComponent<EnemyMover>();
+
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.TryGetComponent(out HealthContainer healthContainer))
@@ -21,6 +25,7 @@ public class Enemy : MonoBehaviour, IDamageable
                     healthContainer.ApplyDamage(_damage);
                     break;
                 case PlayerState.Died:
+                    _mover.enabled = false;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

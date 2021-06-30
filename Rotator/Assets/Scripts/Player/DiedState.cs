@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class DiedState : MonoBehaviour
 {
+    [Header("UI Options")] 
+    [SerializeField] private LosePanel _losePanel;
+    
     private HealthContainer _healthContainer;
     private PlayerStateMachine _player;
     private RotatorState _rotator;
@@ -26,7 +29,8 @@ public class DiedState : MonoBehaviour
 
     private void OnDied()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        enabled = true;
+        _losePanel.LosePanelActive(true);
         _healthContainer.enabled = false;
         _player.enabled = false;
         _rotator.enabled = false;
